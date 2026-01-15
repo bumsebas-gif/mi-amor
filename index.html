@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Untukmu, Cintaku</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: 'Georgia', serif;
+  background:
+    radial-gradient(circle at top, #ffeef4, transparent 60%),
+    radial-gradient(circle at bottom, #f9dbe7, transparent 60%),
+    linear-gradient(180deg, #fff7fb, #fbe6ef);
+  overflow:hidden;
+}
+
+.book{
+  background:#fff;
+  border-radius:18px;
+  padding:32px 26px;
+  width:360px;
+  max-width:90%;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+  animation:fade 1s;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:scale(0.96);}
+  to{opacity:1; transform:scale(1);}
+}
+
+h1{
+  color:#c2185b;
+  font-size:28px;
+}
+
+p{
+  color:#4a2c2a;
+  font-size:18px;
+  line-height:1.6;
+  animation:page 0.7s;
+}
+
+@keyframes page{
+  from{opacity:0; transform:translateX(20px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+button{
+  margin-top:20px;
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:#e91e63;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button.alt{
+  background:#aaa;
+  margin-left:10px;
+}
+
+#loveWords{
+  font-size:20px;
+  color:#e91e63;
+  margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="contigo-los-panchos.mp3" loop></audio>
+
+<div class="book" id="app">
+  <h1>Selamat pagi<br>cintaku</h1>
+  <button onclick="start()">❤️ Mulai</button>
+</div>
+
+<script>
+let page = 0;
+let loveIndex = 0;
+
+const pages = [
+`<p>Hari ini, aku ingin kamu tersenyum,<br>
+karena dunia terasa lebih indah<br>
+sejak kamu ada.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Semoga sekolah hari ini<br>
+ringan untuk hatimu<br>
+dan tenang untuk pikiranmu.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Ingatlah,<br>
+kamu lebih kuat<br>
+dari rasa lelahmu.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Aku percaya padamu,<br>
+bahkan saat kamu ragu<br>
+pada dirimu sendiri.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Aku bangga pada setiap langkah kecilmu,<br>
+karena aku melihat masa depanmu.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Cintaku padamu<br>
+tenang, dalam,<br>
+dan tulus.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Aku memilihmu hari ini,<br>
+besok,<br>
+dan selamanya.</p>
+<button onclick="next()">📖</button>`,
+
+`<p>Kamu bukan hanya cintaku,<br>
+kamu adalah rumahku.</p>
+<button onclick="next()">📖</button>`,
+
+`<h1>Maukah kamu menikah denganku? 💍</h1>
+<button onclick="yes()">💖 Ya</button>
+<button class="alt" onclick="no()">🙈 Tidak</button>`
+];
+
+const loveWords = [
+"Aku mencintaimu 🇮🇩",
+"愛してる 🇯🇵",
+"사랑해 🇰🇷",
+"我爱你 🇨🇳",
+"ฉันรักคุณ 🇹🇭",
+"Anh yêu em 🇻🇳"
+];
+
+function start(){
+  const music = document.getElementById("music");
+  music.volume = 0.35;
+  music.play();
+  next();
+}
+
+function next(){
+  if(page < pages.length){
+    document.getElementById("app").innerHTML = pages[page];
+    page++;
+  }
+}
+
+function yes(){
+  document.getElementById("app").innerHTML = `
+    <p>Yey! 🧸💖<br>
+    Aku sangat bahagia!<br>
+    Kamu adalah dongeng terindah dalam hidupku.</p>
+    <div id="loveWords"></div>
+  `;
+  showLove();
+}
+
+function no(){
+  document.getElementById("app").innerHTML = `
+    <p>Yah… nasib buruk 😌<br>
+    Tapi bagaimanapun juga,<br>
+    kamu tetap akan menjadi istriku<br>
+    dan ibu dari anak-anakku :)</p>
+    <div id="loveWords"></div>
+  `;
+  showLove();
+}
+
+function showLove(){
+  if(loveIndex < loveWords.length){
+    document.getElementById("loveWords").innerText = loveWords[loveIndex];
+    loveIndex++;
+    setTimeout(showLove, 450);
+  }
+}
+</script>
+
+</body>
+</html>
